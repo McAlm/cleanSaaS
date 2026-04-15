@@ -1,0 +1,38 @@
+spring:
+  main:
+    # Run as a CLI tool — no embedded web server needed
+    web-application-type: none
+
+camunda:
+  client:
+    # ── Orchestration Cluster REST API ────────────────────────────────────────
+    # Copy this value from: Camunda Console → Cluster → API → Clients → REST API URL
+    # Format: https://<region>.zeebe.camunda.io/<cluster-id>
+    rest-address: https://<region>.zeebe.camunda.io/<cluster-id>
+
+    auth:
+      # OAuth2 client credentials
+      # Created in: Camunda Console → Cluster → API → Create new client
+      # Required scopes: Zeebe (for delete), Operate (for search)
+      client-id: <client-id>
+      client-secret: <client-secret>
+
+      # The following are Camunda SaaS defaults — override only if needed
+      # token-url: https://login.cloud.camunda.io/oauth/token
+      # audience: zeebe.camunda.io
+
+    cleanup:
+      # BPMN process IDs to delete (the "id" attribute in your .bpmn files).
+      # Remove or leave empty to delete ALL process definitions in the cluster.
+      process-definition-ids:
+        # - <process-id-1>
+        # - <process-id-2>
+        # - another-process
+
+      # Set to true to also delete all running and historic process instances.
+      # WARNING: Cascaded deletion is irreversible.
+      cascade: true
+
+logging:
+  level:
+    io.cleansaas: INFO
